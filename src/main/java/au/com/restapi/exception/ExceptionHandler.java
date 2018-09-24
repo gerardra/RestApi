@@ -14,15 +14,13 @@ import org.springframework.web.servlet.mvc.method.annotation.ResponseEntityExcep
 
 import com.fasterxml.jackson.databind.exc.InvalidDefinitionException;
 
-import au.com.restapi.controller.MediaController;
-
 @ControllerAdvice
 public class ExceptionHandler extends ResponseEntityExceptionHandler {
 	
 	private static Logger logger = LoggerFactory.getLogger(ExceptionHandler.class);
 
 	public final ResponseEntity<Object> handleHttpMessageNotReadable(final HttpMessageNotReadableException ex, final HttpHeaders headers, final HttpStatus status, WebRequest request) {
-		final String error = "Malformed JSON request";
+		final String error = "Could not decode request: JSON parsing failed";
 	    ExceptionDetails exceptionDetails = ExceptionDetails.newExcptionWithStatusAndMessage(HttpStatus.BAD_REQUEST, error);
 	    logger.error("Exception occured " + exceptionDetails + "exception details " + ex.getLocalizedMessage());
 	    return buildResponseEntity(exceptionDetails);

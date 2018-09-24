@@ -11,8 +11,7 @@ public class ExceptionDetails {
 	private HttpStatus status;
 	@JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "dd-MM-yyyy hh:mm:ss")
 	private LocalDateTime timestamp;
-	private String message;
-	private String debugMessage;
+	private String error;
 
 	private ExceptionDetails() {
 		timestamp = LocalDateTime.now();
@@ -27,23 +26,21 @@ public class ExceptionDetails {
 	static ExceptionDetails newExcptionWithStatusAndException(final HttpStatus status, final Throwable ex) {
 		final ExceptionDetails exceptionDetails = new ExceptionDetails();
 		exceptionDetails.status = status;
-		exceptionDetails.message = "Unexpected error";
-		exceptionDetails.debugMessage = ex.getLocalizedMessage();
+		exceptionDetails.error = "Unexpected error";
 		return exceptionDetails;
 	}
 
 	static ExceptionDetails newExcptionWithStatusExceptionAndMessage(final HttpStatus status, String message, Throwable ex) {
 		final ExceptionDetails exceptionDetails = new ExceptionDetails();
 		exceptionDetails.status = status;
-		exceptionDetails.message = ex.getLocalizedMessage();
-		exceptionDetails.debugMessage = ex.getLocalizedMessage();
+		exceptionDetails.error = ex.getLocalizedMessage();
 		return exceptionDetails;
 	}
 	
 	static ExceptionDetails newExcptionWithStatusAndMessage(final HttpStatus status, String message) {
 		final ExceptionDetails exceptionDetails = new ExceptionDetails();
 		exceptionDetails.status = status;
-		exceptionDetails.message = message;
+		exceptionDetails.error = message;
 		return exceptionDetails;
 	}
 
@@ -55,18 +52,13 @@ public class ExceptionDetails {
 		return timestamp;
 	}
 
-	public String getMessage() {
-		return message;
-	}
-
-	public String getDebugMessage() {
-		return debugMessage;
+	public String getError() {
+		return error;
 	}
 
 	@Override
 	public String toString() {
-		return "ExceptionDetails [status=" + status + ", timestamp=" + timestamp + ", message=" + message
-				+ ", debugMessage=" + debugMessage + "]";
+		return "ExceptionDetails [status=" + status + ", timestamp=" + timestamp + ", error=" + error + "]";
 	}
 
 	
