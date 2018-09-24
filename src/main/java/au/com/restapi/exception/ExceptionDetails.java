@@ -63,4 +63,11 @@ public class ExceptionDetails {
 		return debugMessage;
 	}
 
+	@Override
+	public String toString() {
+		return "ExceptionDetails [status=" + status + ", timestamp=" + timestamp + ", message=" + message
+				+ ", debugMessage=" + debugMessage + "]";
+	}
+
+	
 }
