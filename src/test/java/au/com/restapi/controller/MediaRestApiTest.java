@@ -66,7 +66,7 @@ public class MediaRestApiTest {
 	)
 	 public void invaildHttpMethodMethod() throws Exception {
 		 String generateRequestJson = TestUtils.generateRequestJson("invaildHttpMethodMethod", this.getClass());
-	     MockHttpServletRequestBuilder builder = MockMvcRequestBuilders.post("/media/episodeDetails")
+	     MockHttpServletRequestBuilder builder = MockMvcRequestBuilders.get("/media/episodeDetails")
 			                                       .contentType(MediaType.APPLICATION_JSON)
 			                                       .content(generateRequestJson);
 	     mockMvc.perform(builder).andExpect(status().isMethodNotAllowed());
@@ -105,7 +105,7 @@ public class MediaRestApiTest {
 		 String generateRequestJson = TestUtils.generateRequestJson("vaildPostHttpOperation", this.getClass());
 		 logger.info(generateRequestJson);
 		 MockHttpServletRequestBuilder builder =
-                 MockMvcRequestBuilders.get("/media/episodeDetails")
+                 MockMvcRequestBuilders.post("/media/episodeDetails")
                                        .contentType(MediaType.APPLICATION_JSON)
                                        .content(generateRequestJson);
 		 this.mockMvc.perform(builder).andExpect(status().isOk());
@@ -115,7 +115,7 @@ public class MediaRestApiTest {
 	 @Test
 	 public void invalidJson() throws Exception {
 		 MockHttpServletRequestBuilder builder =
-				 MockMvcRequestBuilders.get("/media/episodeDetails")
+				 MockMvcRequestBuilders.post("/media/episodeDetails")
 				 .contentType(MediaType.APPLICATION_JSON)
 				 .content("test");
 		 this.mockMvc.perform(builder).andExpect(status().isBadRequest());
@@ -155,7 +155,7 @@ public class MediaRestApiTest {
 		 String generateRequestJson = TestUtils.generateRequestJson("UnsupportedMediaType", this.getClass());
 		 logger.info(generateRequestJson);
 		 MockHttpServletRequestBuilder builder =
-				 MockMvcRequestBuilders.get("/media/episodeDetails")
+				 MockMvcRequestBuilders.post("/media/episodeDetails")
 				 .contentType(MediaType.APPLICATION_XML)
 				 .content(generateRequestJson);
 		 this.mockMvc.perform(builder).andExpect(status().isUnsupportedMediaType());
@@ -165,7 +165,7 @@ public class MediaRestApiTest {
 	 @Test
 	 public void emptyContentInBody() throws Exception {
 		 MockHttpServletRequestBuilder builder =
-				 MockMvcRequestBuilders.get("/media/episodeDetails")
+				 MockMvcRequestBuilders.post("/media/episodeDetails")
 				 .contentType(MediaType.APPLICATION_JSON)
 				 .content("");
 		 this.mockMvc.perform(builder).andExpect(status().isBadRequest());

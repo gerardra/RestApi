@@ -19,7 +19,7 @@ import au.com.restapi.domain.Response;
 public class MediaController  {
 
 
-	@RequestMapping(method = RequestMethod.GET, value="/media/episodeDetails", consumes = "application/json")
+	@RequestMapping(method = RequestMethod.POST, value="/media/episodeDetails", consumes = "application/json")
     @ResponseBody
     public Response getEpisodeDetails(@RequestBody Request request) {
 		final Response response = new Response();
