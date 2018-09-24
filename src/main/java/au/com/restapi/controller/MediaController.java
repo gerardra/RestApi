@@ -32,6 +32,8 @@ public class MediaController  {
 			List<EpisodeResponseDetails> episodeDetails = results.stream().map(r -> new EpisodeResponseDetails(r.getImage(), r.getSlug(), r.getTitle())).collect(Collectors.toList());
 			response.setResponse(episodeDetails);
 			logger.info("Response with size " + response.getResponse().size() + " sent");
+		} else {
+			logger.info("Returning a empty response");
 		}
         return response;
     }
