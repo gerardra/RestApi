@@ -24,7 +24,7 @@ public class MediaController  {
 
 	private static Logger logger = LoggerFactory.getLogger(MediaController.class);
 
-	@RequestMapping(method = RequestMethod.POST, value="/", consumes = "application/json")
+	@RequestMapping(method = RequestMethod.POST, value="/media/episodeDetails", consumes = "application/json")
     @ResponseBody
     public ResponseEntity<Response> getEpisodeDetails(@RequestBody Request request) {
 		logger.info("Received a request with size " + request.getPayload().size() + " received");
