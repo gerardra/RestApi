@@ -62,4 +62,5 @@ public class ExceptionHandler extends ResponseEntityExceptionHandler {
 	private ResponseEntity<Object> buildResponseEntity(ExceptionDetails exceptionDetails) {
 	       return new ResponseEntity<>(exceptionDetails, exceptionDetails.getStatus());
 	}
+	
 }
