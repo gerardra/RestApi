@@ -8,6 +8,7 @@ import org.junit.Before;
 import org.junit.Test;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.http.ResponseEntity;
 
 import com.fasterxml.jackson.databind.DeserializationFeature;
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -75,7 +76,8 @@ public class MediaControllerTest {
 			String generateJson = TestUtils.generateRequestJson("RequestWithValidValues", this.getClass());
 			logger.info(generateJson);
 			Request request = mapper.readValue(generateJson, Request.class);
-			Response episodeDetails = mediaController.getEpisodeDetails(request);
+			ResponseEntity<Response> episodeDetailsEntity = mediaController.getEpisodeDetails(request);
+			Response episodeDetails = episodeDetailsEntity.getBody();
 			Assert.assertNotNull(episodeDetails);
 			Assert.assertEquals(1, episodeDetails.getResponse().size());
 			Assert.assertNull(episodeDetails.getResponse().get(0).getImage() );
@@ -118,7 +120,8 @@ public class MediaControllerTest {
 			String generateJson = TestUtils.generateRequestJson("RequestWithoutNextEpisodeAndImage", this.getClass());
 			logger.info(generateJson);
 			Request request = mapper.readValue(generateJson, Request.class);
-			Response episodeDetails = mediaController.getEpisodeDetails(request);
+			ResponseEntity<Response> episodeDetailsEntity = mediaController.getEpisodeDetails(request);
+			Response episodeDetails = episodeDetailsEntity.getBody();
 			Assert.assertNotNull(episodeDetails);
 			Assert.assertEquals(1, episodeDetails.getResponse().size());
 			Assert.assertNull(episodeDetails.getResponse().get(0).getImage() );
@@ -165,7 +168,8 @@ public class MediaControllerTest {
 			String generateJson = TestUtils.generateRequestJson("RequestWithoutNextEpisodeSeasonsAndImage", this.getClass());
 			logger.info(generateJson);
 			Request request = mapper.readValue(generateJson, Request.class);
-			Response episodeDetails = mediaController.getEpisodeDetails(request);
+			ResponseEntity<Response> episodeDetailsEntity = mediaController.getEpisodeDetails(request);
+			Response episodeDetails = episodeDetailsEntity.getBody();
 			Assert.assertNotNull(episodeDetails);
 			Assert.assertEquals(2, episodeDetails.getResponse().size());
 			Assert.assertNull(episodeDetails.getResponse().get(0).getImage() );
@@ -279,7 +283,8 @@ public class MediaControllerTest {
 			String generateJson = TestUtils.generateRequestJson("RequestEpisodeCountZero", this.getClass());
 			logger.info(generateJson);
 			Request request = mapper.readValue(generateJson, Request.class);
-			Response episodeDetails = mediaController.getEpisodeDetails(request);
+			ResponseEntity<Response> episodeDetailsEntity = mediaController.getEpisodeDetails(request);
+			Response episodeDetails = episodeDetailsEntity.getBody();
 			Assert.assertNotNull(episodeDetails);
 			Assert.assertEquals(0, episodeDetails.getResponse().size());
 		} catch (Exception e) {
@@ -387,7 +392,8 @@ public class MediaControllerTest {
 			String generateJson = TestUtils.generateRequestJson("RequestDrmFalse", this.getClass());
 			logger.info(generateJson);
 			Request request = mapper.readValue(generateJson, Request.class);
-			Response episodeDetails = mediaController.getEpisodeDetails(request);
+			ResponseEntity<Response> episodeDetailsEntity = mediaController.getEpisodeDetails(request);
+			Response episodeDetails = episodeDetailsEntity.getBody();
 			Assert.assertNotNull(episodeDetails);
 			Assert.assertEquals(0, episodeDetails.getResponse().size());
 		} catch (Exception e) {
