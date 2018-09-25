@@ -1,9 +1,5 @@
 package au.com.restapi.exception;
 
-import java.net.MalformedURLException;
-
-import javax.servlet.http.HttpServletRequest;
-
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.http.HttpHeaders;
@@ -14,11 +10,8 @@ import org.springframework.web.HttpMediaTypeNotSupportedException;
 import org.springframework.web.HttpRequestMethodNotSupportedException;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.context.request.WebRequest;
-import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.NoHandlerFoundException;
 import org.springframework.web.servlet.mvc.method.annotation.ResponseEntityExceptionHandler;
-
-import com.fasterxml.jackson.databind.exc.InvalidDefinitionException;
 
 @ControllerAdvice
 public class ExceptionHandler extends ResponseEntityExceptionHandler {
@@ -58,6 +51,13 @@ public class ExceptionHandler extends ResponseEntityExceptionHandler {
 		return buildResponseEntity(exceptionDetails);
 	}
 	
+	@org.springframework.web.bind.annotation.ExceptionHandler(Exception.class)
+    public ResponseEntity<Object> exception(Exception ex) {
+		final String error = "Something unexpected happened. Please call the administrator.";
+		ExceptionDetails exceptionDetails = ExceptionDetails.newExcptionWithStatusAndMessage(HttpStatus.INTERNAL_SERVER_ERROR, error);
+		logger.error("Exception occured " + exceptionDetails + "exception details " + ex.getLocalizedMessage());
+		return buildResponseEntity(exceptionDetails);
+    }
 	
 	private ResponseEntity<Object> buildResponseEntity(ExceptionDetails exceptionDetails) {
 	       return new ResponseEntity<>(exceptionDetails, exceptionDetails.getStatus());
