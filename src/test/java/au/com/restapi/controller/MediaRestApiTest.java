@@ -69,7 +69,7 @@ public class MediaRestApiTest {
 	     MockHttpServletRequestBuilder builder = MockMvcRequestBuilders.get("/media/episodeDetails")
 			                                       .contentType(MediaType.APPLICATION_JSON)
 			                                       .content(generateRequestJson);
-	     mockMvc.perform(builder).andExpect(status().isMethodNotAllowed());
+	     mockMvc.perform(builder).andExpect(status().isNotFound());
 	 }
 	 
 	 @Test
